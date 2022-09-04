@@ -145,4 +145,14 @@ public class RedisServiceImpl implements RedisService {
         HashOperations<K, HK, HV> operations = redisTemplate.opsForHash();
         return operations.entries(key);
     }
+
+    @Override
+    public boolean set(String key, Object value) {
+        return false;
+    }
+
+    @Override
+    public boolean set(String key, Object value, Long expireTime) {
+        return false;
+    }
 }

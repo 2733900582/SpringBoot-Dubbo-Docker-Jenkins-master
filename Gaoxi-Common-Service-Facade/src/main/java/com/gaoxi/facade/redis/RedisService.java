@@ -78,4 +78,8 @@ public interface RedisService {
      * @return
      */
     public <K,HK,HV> Map<HK,HV> getMap(final K key);
+
+    boolean set(String key, Object value);
+
+    boolean set(String key, Object value, Long expireTime);
 }

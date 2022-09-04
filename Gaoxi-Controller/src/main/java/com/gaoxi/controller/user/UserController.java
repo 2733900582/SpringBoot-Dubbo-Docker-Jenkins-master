@@ -2,14 +2,28 @@ package com.gaoxi.controller.user;
 
 import com.gaoxi.annotation.Login;
 import com.gaoxi.annotation.Permission;
-import com.gaoxi.entity.user.*;
+import com.gaoxi.entity.user.LocationEntity;
+import com.gaoxi.entity.user.MenuEntity;
+import com.gaoxi.entity.user.PermissionEntity;
+import com.gaoxi.entity.user.RoleEntity;
+import com.gaoxi.entity.user.UserEntity;
 import com.gaoxi.req.BatchReq;
-import com.gaoxi.req.user.*;
+import com.gaoxi.req.user.AdminCreateReq;
+import com.gaoxi.req.user.LocationCreateReq;
+import com.gaoxi.req.user.LocationUpdateReq;
+import com.gaoxi.req.user.LoginReq;
+import com.gaoxi.req.user.RegisterReq;
+import com.gaoxi.req.user.RoleMenuReq;
+import com.gaoxi.req.user.RolePermissionReq;
+import com.gaoxi.req.user.UserQueryReq;
+import com.gaoxi.req.user.UserStateReq;
 import com.gaoxi.rsp.Result;
-import com.sun.org.apache.regexp.internal.RE;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.persistence.PersistenceUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -23,8 +37,9 @@ public interface UserController {
 
     /**
      * 登录
+     *
      * @param loginReq 登录请求参数
-     * @param httpRsp HTTP响应
+     * @param httpRsp  HTTP响应
      * @return 登录是否成功
      */
     @GetMapping("/login")
@@ -32,6 +47,7 @@ public interface UserController {
 
     /**
      * 登出
+     *
      * @param httpReq HTTP请求
      * @param httpRsp HTTP响应
      * @return 是否登出成功
@@ -42,8 +58,9 @@ public interface UserController {
 
     /**
      * 注册
+     *
      * @param registerReq 注册请求
-     * @param httpRsp HTTP响应
+     * @param httpRsp     HTTP响应
      * @return 注册是否成功
      */
     @PostMapping("/register")
@@ -52,6 +69,7 @@ public interface UserController {
 
     /**
      * 判断指定用户是否登录
+     *
      * @return
      */
     @GetMapping("/isLogin")
@@ -61,6 +79,7 @@ public interface UserController {
 
     /**
      * 查询用户信息
+     *
      * @param userQueryReq 用户查询请求
      * @return 用户查询结果
      */
@@ -71,6 +90,7 @@ public interface UserController {
 
     /**
      * 批量更新用户状态
+     *
      * @param userStateReqs 更新用户状态的请求列表
      * @return 更新是否成功
      */
@@ -82,6 +102,7 @@ public interface UserController {
 
     /**
      * 创建管理员
+     *
      * @param adminCreateReq 管理员创建请求
      * @return 创建是否成功
      */
@@ -92,6 +113,7 @@ public interface UserController {
 
     /**
      * 查询所有角色
+     *
      * @return 返回所有角色
      */
     @GetMapping("/role")
@@ -103,6 +125,7 @@ public interface UserController {
 
     /**
      * 删除指定角色
+     *
      * @param roleId 角色ID
      * @return 是否删除成功
      */
@@ -113,6 +136,7 @@ public interface UserController {
 
     /**
      * 修改角色对应的菜单
+     *
      * @param roleMenuReq 角色-菜单的修改请求
      * @return 是否修改成功
      */
@@ -123,6 +147,7 @@ public interface UserController {
 
     /**
      * 修改角色对应的权限
+     *
      * @param rolePermissionReq 角色-权限的修改请求
      * @return 是否修改成功
      */
@@ -133,6 +158,7 @@ public interface UserController {
 
     /**
      * 查询所有的权限
+     *
      * @return 所有的权限列表
      */
     @GetMapping("permission")
@@ -142,6 +168,7 @@ public interface UserController {
 
     /**
      * 查询所有的菜单列表
+     *
      * @return 所有的菜单列表
      */
     @GetMapping("/menu")
@@ -151,6 +178,7 @@ public interface UserController {
 
     /**
      * 查询当前登录用户的所有地址信息
+     *
      * @param httpReq HTTP请求
      * @return 地址信息列表
      */
@@ -160,8 +188,9 @@ public interface UserController {
 
     /**
      * 创建收货地址
+     *
      * @param locationCreateReq 收货地址创建请求
-     * @param httpReq HTTP请求
+     * @param httpReq           HTTP请求
      * @return 收货地址的ID
      */
     @PostMapping("/location")
@@ -170,8 +199,9 @@ public interface UserController {
 
     /**
      * 删除收货地址
+     *
      * @param locationId 收货地址的ID
-     * @param httpReq HTTP请求
+     * @param httpReq    HTTP请求
      * @return 是否删除成功
      */
     @DeleteMapping("/location")
@@ -180,8 +210,9 @@ public interface UserController {
 
     /**
      * 修改收货地址
+     *
      * @param locationUpdateReq 收货地址修改请求
-     * @param httpReq HTTP请求
+     * @param httpReq           HTTP请求
      * @return 是否修改成功
      */
     @PutMapping("/location")

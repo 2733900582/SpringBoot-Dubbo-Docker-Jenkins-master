@@ -5,15 +5,17 @@ package com.gaoxi.redis.service;
  * @date 2017/11/1 下午3:15
  * @description
  */
-import java.io.Serializable;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.gaoxi.facade.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+
+import java.io.Serializable;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @org.springframework.stereotype.Service
 @Service(version = "1.0.0")
@@ -76,12 +78,39 @@ public class RedisServiceImpl implements RedisService {
      * @param key
      * @return
      */
+//    @Override
+//    public Object get(final String key) {
+//        Object result = null;
+//        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+//        result = operations.get(key);
+//        return result;
+//    }
     @Override
-    public Object get(final String key) {
-        Object result = null;
-        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+    public Serializable get(final String key) {
+        Serializable result = null;
+        ValueOperations<Serializable, Serializable> operations = redisTemplate.opsForValue();
         result = operations.get(key);
         return result;
+    }
+
+    @Override
+    public boolean set(String key, Serializable value) {
+        return false;
+    }
+
+    @Override
+    public boolean set(String key, Serializable value, Long expireTime) {
+        return false;
+    }
+
+    @Override
+    public <K, HK, HV> boolean setMap(K key, Map<HK, HV> map, Long expireTime) {
+        return false;
+    }
+
+    @Override
+    public <K, HK, HV> Map<HK, HV> getMap(K key) {
+        return null;
     }
 
     /**
